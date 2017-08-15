@@ -1,4 +1,6 @@
 # Owntrack_Elecrow_32u4_A7_GPS_GPRS_GSM_tracker
+
+
 Owntracks with Elecrow 32u4 with A7 GPS/GPRS/GSM tracker
 See haw to prepare board.
 
@@ -19,5 +21,7 @@ http://owntracks.org/booklet/
 https://github.com/owntracks
 
 
-See inside in the code the comments it is described inside. This module send data in owntrackks through mqtt server in gprs see owntracks documentation
-, additionaly the power save functions are added and no movement control.
+See inside in the code the comments it is described inside. This module send data in owntrackks through mqtt server in gprs see owntracks documentation.
+Additionaly the power save functions are added and no movement control.
+
+
