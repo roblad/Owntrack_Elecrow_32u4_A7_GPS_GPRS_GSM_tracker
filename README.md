@@ -6,6 +6,8 @@ https://www.flickr.com/gp/128785919@N03/H1wbw3
 
 https://www.flickr.com/photos/128785919@N03/36585564585/in/album-72157687539652046/
 
+http://www.ekt2.com/pdf/14_SENSOR_VIBRATION_SWITCH_SW-18010P.pdf
+
 Links:
 
 https://www.elecrow.com/wiki/index.php?title=32u4_with_A7_GPRS/GSM
