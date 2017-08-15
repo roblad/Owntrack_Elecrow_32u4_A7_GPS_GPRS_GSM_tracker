@@ -24,11 +24,11 @@
 #define PORT 1883
 #define MQTTTOPIC "owntracks/tracker/test"
 //#define TOPIC "owntracks/tracker/test"
-#define MQTTUSER  "client"
-#define MQTTPASS "Warszawa123!"
+#define MQTTUSER  "xxxxxxxxxx"
+#define MQTTPASS "xxxxxxxxxxxxxxx"
 #define TID "ts" // "tracker-ID which is used by the auto-faces feature to display, say, initials of a user."
-//#define MQTTSERVER {155,133,46,194}
-#define MQTTSERVER {195,167,145,151}
+//#define MQTTSERVER {xxx,xxx,xxx,xxx}
+#define MQTTSERVER {xxx,xxx,xxx,xxx}
     //const char* addr = "yourservermqtt.com";  if you use server you DNS you do not use IPAdress coment it and set #define addr "nameofmqttserver.com"
     //IPAddress addr(xxx,xxx,xxx,xxx); //in ino schech file
 #define HEARTBIT 40 // there ic multiply by DELAY and sending heartbit - set for every ~8 min when GPS movement trying is ~12 sec. If you will ecide more u have to change MQTT_KEEPALIVE
