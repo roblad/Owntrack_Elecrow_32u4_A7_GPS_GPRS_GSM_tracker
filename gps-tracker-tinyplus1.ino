@@ -844,7 +844,7 @@ void A7_standbyNow(){
 
 void wakeUpNow() {       // here the interrupt is handled after wakeup
     //EIMSK &= ~(1<<INT6); // disables interrupt 4 INT6 on pin 7 
-    detachInterrupt(4);      // disables interrupt 4 INT6 on pin 7 
+    //detachInterrupt(4);      // disables interrupt 4 INT6 on pin 7 
     stendby = 0;
    // execute code here after wake-up before returning to the loop() function
    // timers and code using timers (serial.print and more...) will not work here.
