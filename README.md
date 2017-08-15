@@ -21,7 +21,7 @@ http://owntracks.org/booklet/
 https://github.com/owntracks
 
 
-See inside in the code the comments it is described inside. This module send data in owntrackks through mqtt server in gprs see owntracks documentation.
-Additionaly the power save functions are added and no movement control.
+See inside in the code the comments it is described inside. This module send data in Owntrackks through MQTT server in GPRS see Owntracks documentation.
+Additionally the power save functions are added and no movement control.
 
 
