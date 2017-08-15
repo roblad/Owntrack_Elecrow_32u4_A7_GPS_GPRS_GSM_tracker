@@ -11,7 +11,7 @@
    
    Main link:
    https://www.elecrow.com/wiki/index.php?title=32u4_with_A7_GPRS/GSM
-   
+  
    This schech is prepared for  use of a TinyGPS++ (TinyGPSPlus, PubSubClient, PubSubClient ) objects for A& module GSM/GPRS/GPS integrated with Leonardo Atmega 32u4 chip.
    For transfering data used PubSubClient for MQTT and ArduinoJson for prepare JSON string. The schech is prepared for Owntracks solution http://owntracks.org/.
    
@@ -82,7 +82,6 @@ TinyGsmClient Client(modem); //Create GPRS connection obiect for network operati
 PubSubClient mqtt(Client); //create MQTT object connected to network object
 
 void ledblink ( uint16_t ledinterval, uint8_t times,uint8_t pin);
-//void smartdelay(unsigned long ms); //pre declare function for erly usage  
 bool gprsConnect(const __FlashStringHelper* apn, const __FlashStringHelper* user, const __FlashStringHelper* pwd);
 bool ConnectGSM();
 void sleep(uint16_t count);
@@ -91,7 +90,6 @@ uint8_t reporter = 0; // count for reporting after period of not movment
 volatile uint8_t stendby = 0;  //for SLEEPER and INTERRPUT
 uint8_t restart = 0; //restart count if hang
 uint8_t count = 50;  //counting of looping for control battery
-//uint8_t stendby = 0;
 static uint16_t volt = 0; //voltage percent if you want to use uint8_t bat
 static double LAST_LAT = 0, LAST_LON = 0; //previous position storage
 static char output[JSONBUFFER]; //string aray for publishing JSON conversion string 
@@ -140,9 +138,6 @@ DDRD |= (1<<PD7); // pinMode(6,OUTPUT); //  DDRD |= (1<<PD7); // sets pins 6 (PD
 #define _TOGGLEd6()  (PORTD ^= _BV(PD7))  //(PORTD ^= B01000000)  // Toggle digital pin D6  
 #define _TOGGLEd7()  (PORTE ^= _BV(PE6)) //(PORTE ^= B01000000) // Toggle digital pin D7  
 
-
-
-//ss.begin(GPSBaud);
    
 #if defined DEBAGER || defined DEBAGER2 
  
@@ -197,7 +192,7 @@ void loop(){
 
 #ifdef DEBUGER
 
-    //Serial.println(millis());        
+      
     Serial.print(F("No movement reporter count: "));Serial.println(reporter);delay(20); 
             
 #endif 
@@ -288,42 +283,24 @@ void sleep(uint16_t count){
 #endif          
           yield();
           delay(100);
-          //Serial.begin(GPSBaud);
-          //smartDelay(10);
         }
           
 }
 
 void publishMQTT () { 
+ 
 
-       // mqtt.connect(TID,MQTTUSER,MQTTPASS);
-        //yield();
-        //delay(100);
-     
-     //if (mqtt.connected()) {
         if ( mqtt.connect(TID,MQTTUSER,MQTTPASS)) {
-        //yield();
+
         delay(50);
         smartDelay(10);
 #ifdef DEBUGER    
         Serial.println(F("MQTT OK"));
 #endif
-    //const char* testChar = (char*)prepareData().c_str();
-    //const char *p;
-    //p=prepareData();
-    //strcpy(( (unsigned char*)prepareData().c_str(), testChar);
-    //prepareData().toCharArray(testChar,125); 
-    //const char *p = "";
-    //p=prepareData();
-    //p = prepareData().c_str();
-    //strncpy( valChar, prepareData().c_str(), (size - 1) ;
          
          if (mqtt.publish(MQTTTOPIC,output,JSONBUFFER,true)){
-           //yield();
            delay(300);
-           //for saving ram and ocupate flash instead use ((char)F(MQTTTOPIC)) instead MQTTTOPIC
-          //((const char *)"{\"_type\":\"lwt\",\"tst\":" + epoch(gps.date, gps.time) + "}")
-          //if (mqtt.publish(TOPIC,"dupa")){
+          
             
 #ifdef DEBUGER
             Serial.println(F("Published")); 
@@ -364,12 +341,6 @@ void publishMQTT () {
                    Serial.print(F("MQTT not OK reset modem, state: "));Serial.println(mqtt.state ());
 #endif            
 
-                   //if (ConnectGSM()) {
-                   //mqtt.connect(TID,MQTTUSER,MQTTPASS);
-                   
-                   //delay(50);
-                   //smartDelay(10);
-                   // }
                    init_restart_A7();
                    restart++;
                    smartDelay(10);
@@ -393,7 +364,6 @@ void battery() {
       yield();
       delay(100);
       smartDelay(10);
-     //if (bat < 5 ) {
      if (volt <= 3400 ) {
 #ifdef DEBUGER2 
        
@@ -407,15 +377,7 @@ void battery() {
         delay(3000);
         _HWB_L_4();//PORTD &= ~(1 << PD4); //pin 4 PD4 Low //digitalWrite(4, LOW); 
         delay(500);
-        //ss.end();
-        //yield();
-        
 
-        
-             //3 h
-
-               //sleep(1350);
-               //powerdown
 #ifdef DEBUGER || defined DEBUGER2          
           LowPower.idle(SLEEP_FOREVER, ADC_OFF, TIMER4_OFF, TIMER3_OFF, TIMER1_OFF,TIMER0_OFF, SPI_OFF, USART1_OFF,TWI_OFF,USB_OFF);
 #else
@@ -425,28 +387,8 @@ void battery() {
           
            _HWB_L_18_A0(); //LED BLUE OFF 
            _HWB_L_6(); //LED GREEN OFF 
-           //delay(500);
-          // _HWB_H_8();//PORTB |= (1 << PB4); //pin 8 PB4 HIGH //digitalWrite(8, HIGH);  //POWER UP
-           //delay(500);       
-          // _HWB_L_8(); //PORTB &= ~(1 << PB4); //pin 8 PB4 LOW //digitalWrite(8, LOW); 
-          // delay(3000);
-          // ss.begin(GPSBaud);
-          // yield();
-          // delay(5000);
-           
-         //  battery();
-      // } else if (  bat <= 30 && volt >= 5 ){
-    //  } else if (  volt <= 3480 && volt >= 3250 ){
-      
-//#ifdef DEBUGER2
-       
-//      Serial.println(F("Batt. low !"));
-      
-//#endif   
-    
-      //ledblink(200,15,7);
-      //count=100;
-            //} else if (  bat > 30 ) {
+
+
      } else if (  volt > 3400 ) { 
 
       ledblink(500,3,18);
@@ -495,7 +437,7 @@ bool ConnectGSM () {
        _HWB_H_5();//PORTC |= (1<<PC6); // pin 5 PC6 HIGH digitalWrite(5, HIGH); 
        ss.begin(GPSBaud);
        ConnectGSM ();
-       //yield();
+
       } else {
        restart=(uint8_t)RESTARPERIOD;
      }
@@ -508,8 +450,6 @@ bool ConnectGSM () {
     
 #endif
 
-
-  //if (!modem.gprsConnect(F(APN), F(USER), F(PASS))) {
   if (!modem.gprsConnect(F(APN), F(USER), F(PASS))) {
       
 #ifdef DEBUGER2
@@ -543,7 +483,7 @@ bool checkdata(uint16_t interval) {
    
       
       smartDelay(interval*A7_GPS_PERIOD);
-      //yield();
+
       if (   ! gps.location.isValid() || gps.satellites.value() < 3  || ! gps.time.isValid() || ! gps.date.isValid() ) {
       //|| gps.failedChecksum() !=0 || ! gps.hdop.isValid() || ! gps.course.isValid() || ! gps.speed.isValid() || ! gps.altitude.isValid() 
       
@@ -564,10 +504,7 @@ bool checkdata(uint16_t interval) {
             Serial.println(F("Invalid MQTT or SIM expired for network"));
              
 #endif
-                  uint8_t check=3;
-                  //while (! mqtt.connect(TID,MQTTUSER,MQTTPASS) && check-- >0) {
-                  //yield();
-                  //delay(100);
+                 uint8_t check=3;
                  while ( ! ConnectGSM () && check-- >0) {
                    check--;
                   }
@@ -636,12 +573,10 @@ uint16_t distancemToLAST = 0;
     delay(50);
     //for saving ram and ocupate flash instead use ((char)F(TID)) instead TID and other strings i.e. "location" "_type" etc.
     //or use PROGMEM but there is a very slow operation and data can be corrupted and cli()  can cause taking wrong string
-    //delay(100);
 
     reporter = 1;
     readytosend = true;
     
-    //memset(output,NULL, sizeof(output));
     memset(&output, 0, sizeof output);
     delay(50);
     root.printTo(output,JSONBUFFER);
@@ -694,7 +629,6 @@ unsigned long epoch(TinyGPSDate &d, TinyGPSTime &t) {
    delay(50);
 #endif
    time_t uxdate = now();
-   //yield();
    delay(50);
    smartDelay(10);
    return uxdate;
@@ -719,7 +653,7 @@ void ledblink ( uint16_t ledinterval, uint8_t times,uint8_t pin) {
          _HWB_L_18_A0();                
        break; 
   }
-    //for(uint8_t i=0;i<times*2;i++) {
+
    do { 
          switch (pin) {
          case 6:
@@ -764,9 +698,7 @@ void init_restart_A7 () {
 
   
 #endif
-      Serial.end();
-      //yield();
-    //ss.end();
+    Serial.end();
     _HWB_H_5();//PORTC |= (1<<PC6); //digitalWrite(5, HIGH);    // wake up  // LOW sleep
     delay(3000);
     _HWB_H_4();//PORTD |= (1 << PD4); //pin 4 PD4 HIGH //digitalWrite(4, HIGH);  // power off A7
@@ -786,11 +718,11 @@ void init_restart_A7 () {
     
     if (ss.availableForWrite() >0) {
     
-//#if defined DEBUGER || defined DEBUGER2
+
    
     Serial.begin(GPSBaud);
     yield();
-//#endif    
+
        modem.startGPS();
        smartDelay(5000);
      if (ConnectGSM()) {
@@ -830,10 +762,9 @@ static void smartDelay(uint32_t ms) {
     while (ss.available() >0)
         
         gps.encode(ss.read());
-        //yield(); 
-        //delayMicroseconds(20);
+
   } while (millis() - start < ms);
- //yield();
+
 }
 
 
